@@ -6,7 +6,6 @@ public abstract class Piece
     public abstract char Rune { get; }
     public ConsoleColor Colour { get; }
     public bool HasMoved { get; set; } = false;
-    // public MoveSet MoveSet { get; set; } = new MoveSet();
 
     public Piece(ConsoleColor colour)
     {

@@ -1,11 +1,5 @@
 namespace ChessLibrary;
 
-// public enum ConsoleColor
-// {
-//     Black,
-//     White
-// }
-
 public enum File
 {
     A,

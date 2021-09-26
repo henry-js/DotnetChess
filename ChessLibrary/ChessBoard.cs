@@ -42,15 +42,10 @@ public class ChessBoard
     {
         // TODO: remove position/Point variables
         var pieceColour = ConsoleColor.White;
-        var position = new Point();
         for (int y = BoardState.GetLength(0) - 1; y >= 0; y--)
         {
             for (int x = 0; x < 8; x++)
             {
-                ResetPosition();
-                position.Offset(x, y);
-
-                // Place pawns
                 if (y == 1)
                 {
                     pieceColour = ConsoleColor.White;
@@ -65,7 +60,6 @@ public class ChessBoard
                     Debug.WriteLine($"{BoardState[x, y].ChessPiece?.Name}: ${BoardState[x, y].ChessPiece?.Name}");
                     continue;
                 }
-                // TODO: Row 8 black pieces
                 if (y == 0)
                 {
                     pieceColour = ConsoleColor.White;
@@ -80,13 +74,7 @@ public class ChessBoard
                     Debug.WriteLine($"{BoardState[x, y].ChessPiece?.Name}: ${BoardState[x, y].ChessPiece?.Name}");
                     continue;
                 }
-                // Reseet position
             }
-        }
-        void ResetPosition()
-        {
-            position.X = 0;
-            position.Y = 0;
         }
 
         void PlaceOtherPieces(Cell[,] board, int x, int y, ConsoleColor pieceColour)
@@ -145,9 +133,6 @@ public class ChessBoard
         switch (currentCell.ChessPiece)
         {
             case Knight:
-                // Using the possible translations a knight can move, if that cell exists, it's a legal move
-                // TODO: If currentCell.chessPiece & BoardState[destination].chessPiece are same colour
-                // move is NOT LEGAL
                 var translations = Moves.GetKnightTranslations();
                 currentY = y;
                 currentX = x;
@@ -186,26 +171,26 @@ public class ChessBoard
                 break;
 
             case Bishop:
-                var dictTranslations = MoveDictionaries.GetBishopTranslations();
+                var dictTranslations = Moves.GetBishopTranslations();
                 foreach (var direction in dictTranslations)
                     GetMoveRepeater(x, y, currentCell, direction, 7);
                 break;
 
             case Rook:
-                dictTranslations = MoveDictionaries.GetRookTranslations();
+                dictTranslations = Moves.GetRookTranslations();
                 foreach (var direction in dictTranslations)
                     GetMoveRepeater(x, y, currentCell, direction, 7);
                 break;
 
             case Queen:
-                dictTranslations = MoveDictionaries.GetQueenTranslations();
+                dictTranslations = Moves.GetQueenTranslations();
                 foreach (var direction in dictTranslations)
                     GetMoveRepeater(x, y, currentCell, direction, 7);
                 break;
 
             case King:
-                // check BoardState to make sure move is not check.
-                dictTranslations = MoveDictionaries.GetQueenTranslations();
+                // TODO: check BoardState to make sure move is not check.
+                dictTranslations = Moves.GetQueenTranslations();
                 foreach (var direction in dictTranslations)
                     GetMoveRepeater(x, y, currentCell, direction, 1);
                 break;
@@ -215,11 +200,6 @@ public class ChessBoard
 
 
     }
-
-    // private Dictionary<string, Point> PawnInvert(Piece chessPiece) => chessPiece switch
-    // {
-    //     Piece { Colour: ConsoleColor.Black } => MoveDictionaries.GetPawnTranslations().
-    // };
 
     private void GetMoveRepeater(int x, int y, Cell currentCell, KeyValuePair<string, Point> direction, int moveRange)
     {
