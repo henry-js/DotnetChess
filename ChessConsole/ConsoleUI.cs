@@ -14,7 +14,6 @@ public static class ConsoleUI
             var row = new Cell[8];
             for (int x = 0; x < 8; x++)
             {
-                var location = new Point(x, y);
                 var cell = chessBoard.BoardState[x, y];
                 var piece = cell.ChessPiece;
 

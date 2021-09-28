@@ -40,7 +40,6 @@ public class ChessBoard
     /// </summary>
     public void Init()
     {
-        // TODO: remove position/Point variables
         var pieceColour = ConsoleColor.White;
         for (int y = BoardState.GetLength(0) - 1; y >= 0; y--)
         {
@@ -124,7 +123,6 @@ public class ChessBoard
             cell.IsLegal = false;
         }
 
-        var coords = new Point(x, y);
         var currentCell = BoardState[x, y] ?? null;
 
 
@@ -226,7 +224,6 @@ public class ChessBoard
 
     public void PlacePiece(int x, int y, Piece chessPiece)
     {
-        var coords = new Point(x, y);
         var cell = BoardState[x, y] ?? null;
 
         if (cell is not null && !cell.IsOccupied)
